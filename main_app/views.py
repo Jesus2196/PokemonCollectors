@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic.edit import CreateView
 from .models import Pokemon
 
 # Define the home view
@@ -20,3 +21,8 @@ def pokemon_index(request):
 def pokemon_detail(request, pokemon_id):
     pokemon = Pokemon.objects.get(id=pokemon_id)
     return render(request, 'pokemon/detail.html', {'pokemon': pokemon})
+
+
+class PokemonCreate(CreateView):
+    model = Pokemon
+    fields = '__all__'
