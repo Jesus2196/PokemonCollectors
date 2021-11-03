@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Pokemon
 
 # Define the home view
@@ -26,3 +26,13 @@ def pokemon_detail(request, pokemon_id):
 class PokemonCreate(CreateView):
     model = Pokemon
     fields = '__all__'
+
+
+class PokemonUpdate(UpdateView):
+    model = Pokemon
+    fields = ['level', 'description']
+
+
+class PokemonDelete(DeleteView):
+    model = Pokemon
+    success_url = '/pokemon/'
