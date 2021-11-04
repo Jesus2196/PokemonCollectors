@@ -11,6 +11,11 @@ EXERCISES = (
 )
 
 
+class Toy(models.Model):
+    name = models.CharField(max_length=50)
+    effect = models.TextField(max_length=150)
+
+
 class Pokemon(models.Model):
     name = models.CharField(max_length=100)
     level = models.IntegerField(default=0)
