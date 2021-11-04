@@ -3,17 +3,38 @@
 
 <h1>Pokemon Details</h1>
 
-<div class="card">
-    <div class="card-content">
-        <span class="card-title">{{ pokemon.name }}</span>
-        <p>Level: {{ pokemon.level }}</p>
-        <p>Element: {{ pokemon.element }}</p>
-        <p>Description: {{ pokemon.description }}</p>
+<div class="row">
+    <div class="col s6">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">{{ pokemon.name }}</span>
+                <p>Level: {{ pokemon.level }}</p>
+                <p>Element: {{ pokemon.elemenet }}</p>
+                <p>Description: {{ pokemon.description }}</p>
+            </div>
+            <div class="card-action">
+                <a href="{% url 'pokemon_update' pokemon.id %}">Edit</a>
+                <a href="{% url 'pokemon_delete' pokemon.id %}">Delete</a>
+            </div>
+        </div>
     </div>
-    <div class="card-action">
-        <a href="{% url 'pokemon_update' pokemon.id %}">Edit</a>
-        <a href="{% url 'pokemon_delete' pokemon.id %}">Delete</a>
+    <div class="col s6">
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Exercise</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for training in cat.training_set.all %}
+                <tr>
+                    <td>{{training.date}}</td>
+                    <td>{{training.get_exercise_display}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
-
 {% endblock %}
