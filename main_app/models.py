@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from datetime import date
 
 # Create your models here.
 
@@ -22,11 +23,14 @@ class Pokemon(models.Model):
     def get_absolute_url(self):
         return reverse('detail', kwargs={'pokemon_id': self.id})
 
+    def trained_for_today(self):
+        return self.training_set.filter(date=date.today()).count() >= len(EXERCISES)
+
 
 class Training(models.Model):
     date = models.DateField('Training Date')
     exercise = models.CharField(
-        'Meal Period',
+        'Exercise Time:',
         max_length=1,
         choices=EXERCISES,
         default=EXERCISES[0][0]
@@ -36,3 +40,6 @@ class Training(models.Model):
 
     def __str__(self):
         return f'{self.get_exercise_display()} on {self.date}.'
+
+    class Meta:
+        ordering = ['-date']

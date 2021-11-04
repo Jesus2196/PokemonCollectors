@@ -9,7 +9,7 @@
             <div class="card-content">
                 <span class="card-title">{{ pokemon.name }}</span>
                 <p>Level: {{ pokemon.level }}</p>
-                <p>Element: {{ pokemon.elemenet }}</p>
+                <p>Element: {{ pokemon.element }}</p>
                 <p>Description: {{ pokemon.description }}</p>
             </div>
             <div class="card-action">
@@ -19,6 +19,16 @@
         </div>
     </div>
     <div class="col s6">
+        <form method="post" action="{% url 'add_training' pokemon.id %}">
+            {% csrf_token %}
+            {{ training_form.as_p }}
+            <input type="submit" class="btn" value="Add Exercise">
+        </form>
+        <br> {% if pokemon.trained_for_today %}
+        <div class="card-panel teal-text center-align">{{pokemon.name}} has fully trained.</div>
+        {% else %}
+        <div class="card-panel red-text center-align">{{pokemon.name}} may need to do some training...</div>
+        {% endif %}
         <table class="striped">
             <thead>
                 <tr>
@@ -27,7 +37,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for training in cat.training_set.all %}
+                {% for training in pokemon.training_set.all %}
                 <tr>
                     <td>{{training.date}}</td>
                     <td>{{training.get_exercise_display}}</td>
@@ -37,4 +47,19 @@
         </table>
     </div>
 </div>
+
+<script>
+
+    const dateEl = document.getElementById('id_date');
+    M.Datepicker.init(dateEl, {
+        format: 'yyyy-mm-dd',
+        defaultDate: new Date(),
+        setDefaultDate: true,
+        autoClose: true
+    });
+
+    const selectEl = document.getElementById('id_exercise');
+    M.FormSelect.init(selectEl);
+
+</script>
 {% endblock %}
