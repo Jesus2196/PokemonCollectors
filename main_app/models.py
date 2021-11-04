@@ -15,3 +15,8 @@ class Pokemon(models.Model):
 
     def get_absolute_url(self):
         return reverse('detail', kwargs={'pokemon_id': self.id})
+
+
+class Training(models.Model):
+    date = models.DateField()
+    exercise = models.CharField(max_length=1)
