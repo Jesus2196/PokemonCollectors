@@ -64,10 +64,10 @@
             </div>
             <div class="card-action">
                 <form action="{% url 'unassoc_item' pokemon.id item.id %}" method="post">
-                  {% csrf_token %}
-                  <button type="submit" class="btn">Remove</button>
+                    {% csrf_token %}
+                    <button type="submit" class="btn">Remove</button>
                 </form>
-              </div>
+            </div>
         </div>
         {% endfor %}
         {% else %}
