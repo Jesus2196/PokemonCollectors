@@ -11,9 +11,15 @@ EXERCISES = (
 )
 
 
-class Toy(models.Model):
+class Item(models.Model):
     name = models.CharField(max_length=50)
     effect = models.TextField(max_length=150)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('items_detail', kwargs={'pk': self.id})
 
 
 class Pokemon(models.Model):
@@ -21,6 +27,7 @@ class Pokemon(models.Model):
     level = models.IntegerField(default=0)
     element = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
+    items = models.ManyToManyField(Item)
 
     def __str__(self):
         return f'{self.name} is a {self.element} type Pokemon.'

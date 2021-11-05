@@ -6,3 +6,4 @@ class TrainingForm(ModelForm):
     class Meta:
         model = Training
         fields = ['date', 'exercise']
+
