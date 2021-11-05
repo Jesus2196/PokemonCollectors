@@ -75,6 +75,6 @@ def assoc_item(request, pokemon_id, item_id):
   Pokemon.objects.get(id=pokemon_id).items.add(item_id)
   return redirect('detail', pokemon_id=pokemon_id)
 
-# def unassoc_item(request, pokemon_id, item_id):
-#   Pokemon.objects.get(id=pokemon_id).items.remove(item_id)
-#   return redirect('detail', pokemon_id=pokemon_id)
+def unassoc_item(request, pokemon_id, item_id):
+  Pokemon.objects.get(id=pokemon_id).items.remove(item_id)
+  return redirect('detail', pokemon_id=pokemon_id)
